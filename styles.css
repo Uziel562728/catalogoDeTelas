@@ -16,7 +16,7 @@ body {
 
 /* Contenedor principal que crece */
 .container {
-  flex: 1 0 auto;
+  flex: 1 0 auto; /* crece para ocupar el espacio disponible */
   max-width: 480px;
   margin: 0 auto;
   padding: 20px;
@@ -76,7 +76,7 @@ h1 {
 /* Grid de las tarjetas */
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
   gap: 15px;
   margin-top: 20px;
 }
@@ -103,7 +103,7 @@ h1 {
 .fabric-slider {
   position: relative;
   width: 100%;
-  padding-top: 140%;
+  padding-top: 140%; /* Proporción vertical para imagen */
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -183,7 +183,7 @@ h1 {
 /* Footer siempre abajo */
 footer {
   flex-shrink: 0;
-  margin-top: auto;
+  margin-top: auto; /* Pega el footer abajo */
   text-align: center;
   padding: 30px 15px;
   background: rgba(255, 255, 255, 0.1);
@@ -206,7 +206,7 @@ footer p:last-child {
   }
 
   .catalog-grid {
-    grid-template-columns: repeat(2, 1fr); /* ✅ 2 tarjetas por fila en celular */
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
@@ -223,13 +223,6 @@ footer p:last-child {
   }
 }
 
-/* Extra: para pantallas muy angostas (opcional) */
-@media (max-width: 360px) {
-  .catalog-grid {
-    grid-template-columns: 1fr; /* 👈 Vuelve a 1 tarjeta por fila si es MUY angosta */
-  }
-}
-
 .divider {
   border: none;
   height: 2px;
@@ -240,7 +233,7 @@ footer p:last-child {
 
 /* Modal de imágenes */
 .modal {
-  display: none;
+  display: none; /* oculto por defecto */
   position: fixed;
   z-index: 1000;
   padding-top: 60px;
@@ -269,6 +262,7 @@ footer p:last-child {
   font-size: 1.1rem;
 }
 
+/* Botones anterior y siguiente */
 .modal .prev,
 .modal .next {
   cursor: pointer;
@@ -299,6 +293,7 @@ footer p:last-child {
   right: 10px;
 }
 
+/* Botón cerrar */
 .modal .close {
   position: absolute;
   top: 15px;
@@ -314,7 +309,6 @@ footer p:last-child {
 .modal .close:hover {
   color: #ccc;
 }
-
 #imageModal {
   display: none;
   position: fixed;
