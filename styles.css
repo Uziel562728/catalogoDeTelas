@@ -16,7 +16,7 @@ body {
 
 /* Contenedor principal que crece */
 .container {
-  flex: 1 0 auto; /* crece para ocupar el espacio disponible */
+  flex: 1 0 auto;
   max-width: 480px;
   margin: 0 auto;
   padding: 20px;
@@ -76,7 +76,7 @@ h1 {
 /* Grid de las tarjetas */
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   margin-top: 20px;
 }
@@ -103,7 +103,7 @@ h1 {
 .fabric-slider {
   position: relative;
   width: 100%;
-  padding-top: 140%; /* Proporción vertical para imagen */
+  padding-top: 140%;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -183,7 +183,7 @@ h1 {
 /* Footer siempre abajo */
 footer {
   flex-shrink: 0;
-  margin-top: auto; /* Pega el footer abajo */
+  margin-top: auto;
   text-align: center;
   padding: 30px 15px;
   background: rgba(255, 255, 255, 0.1);
@@ -206,7 +206,7 @@ footer p:last-child {
   }
 
   .catalog-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* 2 tarjetas por fila en celular */
     gap: 10px;
   }
 
@@ -223,6 +223,14 @@ footer p:last-child {
   }
 }
 
+/* Extra: para pantallas muy angostas (opcional) */
+@media (max-width: 360px) {
+  .catalog-grid {
+    grid-template-columns: 1fr; /* 1 tarjeta por fila si es muy angosta */
+  }
+}
+
+/* Divider */
 .divider {
   border: none;
   height: 2px;
@@ -233,7 +241,7 @@ footer p:last-child {
 
 /* Modal de imágenes */
 .modal {
-  display: none; /* oculto por defecto */
+  display: none;
   position: fixed;
   z-index: 1000;
   padding-top: 60px;
@@ -262,7 +270,6 @@ footer p:last-child {
   font-size: 1.1rem;
 }
 
-/* Botones anterior y siguiente */
 .modal .prev,
 .modal .next {
   cursor: pointer;
@@ -293,7 +300,6 @@ footer p:last-child {
   right: 10px;
 }
 
-/* Botón cerrar */
 .modal .close {
   position: absolute;
   top: 15px;
@@ -309,6 +315,7 @@ footer p:last-child {
 .modal .close:hover {
   color: #ccc;
 }
+
 #imageModal {
   display: none;
   position: fixed;
@@ -320,4 +327,47 @@ footer p:last-child {
   align-items: center;
   z-index: 9999;
   flex-direction: column;
+}
+
+/* --- NUEVO: Carrusel Tendencias / Stock Verano --- */
+.tendencia-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+}
+
+.tendencia-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tendencia-carousel::-webkit-scrollbar-thumb {
+  background: #764ba2;
+  border-radius: 3px;
+}
+
+.tendencia-carousel::-webkit-scrollbar-track {
+  background: rgba(118, 75, 162, 0.2);
+  border-radius: 3px;
+}
+
+/* Ajustar ancho de las tarjetas dentro del carrusel */
+.tendencia-carousel .fabric-card {
+  flex: 0 0 160px;
+  max-width: 160px;
+  cursor: default;
+}
+
+/* Reducir tamaño de texto en carrusel para mejor ajuste */
+.tendencia-carousel .fabric-name {
+  font-size: 1rem;
+}
+
+.tendencia-carousel .fabric-description {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  min-height: 40px; /* para alinear mejor altura */
 }
