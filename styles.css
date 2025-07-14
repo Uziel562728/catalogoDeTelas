@@ -385,3 +385,51 @@ footer p:last-child {
     max-width: 200px;
   }
 }
+/* Carrusel horizontal solo para móviles */
+
+.tendencia-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.tendencia-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.tendencia-carousel::-webkit-scrollbar-thumb {
+  background: #764ba2;
+  border-radius: 3px;
+}
+.tendencia-carousel::-webkit-scrollbar-track {
+  background: rgba(118, 75, 162, 0.2);
+  border-radius: 3px;
+}
+
+.tendencia-carousel .fabric-card {
+  flex: 0 0 auto;
+  width: 75%;
+  max-width: 220px;
+  scroll-snap-align: start;
+}
+
+/* En pantallas grandes, vuelve a diseño tipo grid/fila */
+@media (min-width: 768px) {
+  .tendencia-carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: hidden;
+    gap: 20px;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .tendencia-carousel .fabric-card {
+    flex: 0 0 200px;
+    max-width: 200px;
+  }
+}
