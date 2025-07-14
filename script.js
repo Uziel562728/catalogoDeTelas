@@ -1,4 +1,4 @@
-// Animación de entrada de las tarjetas
+// Animación de entrada de las tarjetas 
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.fabric-card');
   cards.forEach((card, index) => {
@@ -24,6 +24,48 @@ document.addEventListener('DOMContentLoaded', () => {
       images[current].classList.add('active');
     }, 3000);
   });
+
+  // Auto scroll horizontal para .tendencia-carousel en móviles
+  const carousel = document.querySelector('.tendencia-carousel');
+  if (carousel) {
+    let scrollAmount = 0;
+    const scrollStep = 1; // píxeles que avanza cada vez
+    const delay = 15;     // ms entre cada paso (velocidad)
+
+    function autoScroll() {
+      scrollAmount += scrollStep;
+      if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
+        scrollAmount = 0; // vuelve al inicio
+      }
+      carousel.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    let autoScrollInterval = setInterval(autoScroll, delay);
+
+    // Pausar auto scroll si el usuario interactúa (mouse o touch)
+    let isUserInteracting = false;
+
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoScrollInterval);
+    });
+    carousel.addEventListener('mouseleave', () => {
+      autoScrollInterval = setInterval(autoScroll, delay);
+    });
+
+    carousel.addEventListener('touchstart', () => {
+      clearInterval(autoScrollInterval);
+      isUserInteracting = true;
+    });
+    carousel.addEventListener('touchend', () => {
+      if (isUserInteracting) {
+        autoScrollInterval = setInterval(autoScroll, delay);
+        isUserInteracting = false;
+      }
+    });
+  }
 });
 
 // WhatsApp consulta con mensaje personalizado
