@@ -10,8 +10,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #333;
+  background: linear-gradient(135deg, #1a7a2e 0%, #66e87e 100%);
+  color: #d5e317;
 }
 
 /* Contenedor principal que crece */
