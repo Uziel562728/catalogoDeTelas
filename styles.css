@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to right, black 50%, yellow 50%);
+  background: linear-gradient(to bottom, black 50%, yellow 50%);
   color: white;
 }
 
