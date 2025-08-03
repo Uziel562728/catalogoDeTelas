@@ -22,9 +22,45 @@
 
     <!-- Tendencia (stock verano) como carrusel -->
     <h2 class="section-title">Tendencias / Stock Verano🔥🔥🔥</h2>
-    <div class="tendencia-carousel">
-      <!-- SPANDEX GLITTER -->
-<div class="fabric-card">
+
+<!-- Nuevo carrusel de imágenes con productos -->
+<div class="carousel">
+  <!-- Imágenes de productos -->
+  <img src="https://i.ibb.co/NdZmTd3c/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-49a5c55d.jpg" alt="Spandex Glitter" class="active" />
+  <img src="https://i.ibb.co/JWNnRNc1/Imagen-de-Whats-App-2025-07-07-a-las-20-57-20-5cfae2e5.jpg" alt="Sastrero Guinea" />
+  <img src="https://i.ibb.co/S4NXdTrk/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-57b22853.jpg" alt="Tejido Boho" />
+
+  <!-- Flechas de navegación -->
+  <button class="arrow left" onclick="prevSlide()">❮</button>
+  <button class="arrow right" onclick="nextSlide()">❯</button>
+
+  <!-- Indicadores -->
+  <div class="carousel-indicators">
+    <div class="indicator active" onclick="currentSlide(1)"></div>
+    <div class="indicator" onclick="currentSlide(2)"></div>
+    <div class="indicator" onclick="currentSlide(3)"></div>
+  </div>
+
+  <!-- Info del producto debajo del carrusel -->
+  <div class="product-info">
+    <h3 id="product-name">Spandex Glitter</h3>
+    <p id="product-description">
+      Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela.
+    </p>
+    <button class="contact-btn" onclick="enviarConsultaConNombre('Spandex Glitter')">Consultar</button>
+  </div>
+</div>
+<div class="search-container">
+  <input type="text" id="fabricSearch" placeholder="Buscar tela..." />
+</div>
+
+
+    <hr class="divider" />
+
+    <!-- Catálogo principal (igual que el original) -->
+    <div  class="catalog-grid">
+  <!-- SPANDEX GLITTER -->
+<div id="spandex-glitter" class="fabric-card">
   <div class="fabric-slider">
     <img class="slider-img active" src="https://i.ibb.co/NdZmTd3c/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-49a5c55d.jpg" alt="SPANDEX GLITTER">
     <img class="slider-img" src="https://i.ibb.co/BYC81mS/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-cdd2fd7f.jpg" alt="SPANDEX GLITTER">
@@ -37,7 +73,7 @@
 </div>
 
       <!-- SASTRERO GUINEA  -->
-      <div class="fabric-card">
+      <div id="sastrero-guinea" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/JWNnRNc1/Imagen-de-Whats-App-2025-07-07-a-las-20-57-20-5cfae2e5.jpg" alt="SASTRERO GUINEA">
           <span class="fabric-label">Sastrero Guinea</span>
@@ -49,7 +85,7 @@
       </div>
 
       <!-- Tejido Boho  -->
-      <div class="fabric-card">
+      <div id="tejido-boho" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/S4NXdTrk/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-57b22853.jpg" alt="Tejido Boho">
           <span class="fabric-label">Tejido Boho</span>
@@ -61,7 +97,7 @@
       </div>
 
       <!-- Camisero Madrid -->
-      <div class="fabric-card">
+      <div id="camisero-madrid" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/tTD0Y3md/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-fef42b50.jpg" alt="Camisero Madrid">
           <span class="fabric-label">Camisero Madrid</span>
@@ -71,15 +107,8 @@
         <div class="fabric-price">Consulta precios</div>
         <a href="#" class="contact-btn" data-name="Camisero Madrid">Consultar</a>
       </div>
-    </div>
-
-    <hr class="divider" />
-
-    <!-- Catálogo principal (igual que el original) -->
-    <div class="catalog-grid">
-
       <!-- Cey Stripe -->
-      <div class="fabric-card">
+      <div id="cey-stripe" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/rRVhv8BZ/Imagen-de-Whats-App-2025-07-07-a-las-20-58-52-7bbbf4bf.jpg" alt="Cey Stripe 1">
           <img class="slider-img" src="https://i.ibb.co/YBZKGK5j/Imagen-de-Whats-App-2025-06-25-a-las-15-36-14-3d7e2246.jpg" alt="Cey Stripe 2">
@@ -92,7 +121,7 @@
       </div>
 
       <!-- Morley Vintage -->
-<div class="fabric-card">
+<div id="morley-vintage" class="fabric-card">
   <div class="fabric-slider">
     <img class="slider-img active" src="https://i.ibb.co/4nwgXLVD/Imagen-de-Whats-App-2025-07-14-a-las-15-03-36-cff3b180.jpg" alt="Morley Vintage 1">
     <img class="slider-img" src="https://i.ibb.co/DPvfV8nw/Imagen-de-Whats-App-2025-07-14-a-las-14-14-10-aba94905.jpg" alt="Morley Vintage 2">
@@ -103,8 +132,8 @@
   <div class="fabric-price">Consulta precios</div>
   <a href="#" class="contact-btn" data-name="Morley Vintage">Consultar</a>
 </div>
-<!-- Foil Plizado -->
-<div class="fabric-card">
+<!-- Foil-Plizado -->
+<div id="foil plizado" class="fabric-card">
   <div class="fabric-slider">
     <img class="slider-img active" src="https://i.ibb.co/gbJ2xMc4/Imagen-de-Whats-App-2025-07-14-a-las-09-43-46-41f6c977.jpg" alt="Foil Plizado 1">
     <img class="slider-img" src="https://i.ibb.co/L2dRSLT/Imagen-de-Whats-App-2025-07-14-a-las-14-31-25-f6d9f8c8.jpg" alt="Foil Plizado 2">
@@ -116,8 +145,8 @@
   <div class="fabric-price">Consulta precios</div>
   <a href="#" class="contact-btn" data-name="Foil Plizado">Consultar</a>
 </div>
-<!-- Plated Foil Clásico -->
-<div class="fabric-card">
+<!-- Plated-Foil-Clásico -->
+<div id="plated foil clasico" class="fabric-card">
   <div class="fabric-slider">
     <img class="slider-img active" src="https://i.ibb.co/gbw9B01J/Imagen-de-Whats-App-2025-07-14-a-las-14-14-42-c9468e89.jpg" alt="Plated Foil Clásico 1">
     <img class="slider-img" src="https://i.ibb.co/jvs0b5Jp/Imagen-de-Whats-App-2025-07-14-a-las-14-41-39-9eeebb9e.jpg" alt="Plated Foil Clásico 2">
@@ -131,7 +160,7 @@
 
       
       <!-- Lentejuela Tull -->
-      <div class="fabric-card">
+      <div id="lentejuela-tull" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/5XcQbp0S/Imagen-de-Whats-App-2025-07-07-a-las-20-59-11-6dad610a.jpg" alt="Lentejuela Tull">
           <span class="fabric-label">LENTEJUELA TULL</span>
@@ -143,7 +172,7 @@
       </div>
 
       <!-- Lolise Puffing Dsn #2 -->
-      <div class="fabric-card">
+      <div id="lolise-puffing-dsn-#2" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/XZ7VnV4x/Imagen-de-Whats-App-2025-06-24-a-las-17-24-16-7584622e.jpg" alt="Lolise Puffing Dsn 1">
           <img class="slider-img" src="https://i.ibb.co/fdQ51qLs/Imagen-de-Whats-App-2025-06-24-a-las-17-19-11-45dab3ca.jpg" alt="Lolise Puffing Dsn 2">
@@ -157,7 +186,7 @@
       </div>
 
       <!-- Noche Scuba Glitter -->
-      <div class="fabric-card">
+      <div id="noche-scuba-glitter" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/0pN6Fs3d/Imagen-de-Whats-App-2025-06-23-a-las-13-38-05-a414cec7.jpg" alt="Noche Scuba Glitter 1">
           <img class="slider-img" src="https://i.ibb.co/DDst815J/Imagen-de-Whats-App-2025-06-23-a-las-13-46-17-b6cd6e21.jpg" alt="Noche Scuba Glitter 2">
@@ -172,7 +201,7 @@
       </div>
 
       <!-- Modal Viscosa -->
-      <div class="fabric-card">
+      <div id="modal-viscosa" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/DPV6H2yR/Imagen-de-Whats-App-2025-07-07-a-las-20-58-55-833db329.jpg" alt="Modal Viscosa">
           <span class="fabric-label">MODAL VISCOSA</span>
@@ -184,7 +213,7 @@
       </div>
 
       <!-- Creppe Sastrero Rayado -->
-      <div class="fabric-card">
+      <div id="creppe-sastrero-rayado" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/d4j3ZNLX/Imagen-de-Whats-App-2025-07-07-a-las-20-58-33-77a48086.jpg" alt="Creppe Sastrero Rayado">
           <span class="fabric-label">CREPPE SASTRERO RAYADO</span>
@@ -196,7 +225,7 @@
       </div>
 
       <!-- Sastrero Colores 2026 -->
-      <div class="fabric-card">
+      <div id="sastrero-colores-2026" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/FbqNYrHZ/Imagen-de-Whats-App-2025-07-07-a-las-20-58-14-3315a956.jpg" alt="Sastrero Colores 2026">
           <span class="fabric-label">SASTRERO COLORES 2026</span>
@@ -208,7 +237,7 @@
       </div>
 
       <!-- Bruselas Caoba -->
-      <div class="fabric-card">
+      <div id="bruselas-caoba" class="fabric-card">
         <div class="fabric-slider">
           <img class="slider-img active" src="https://i.ibb.co/QjbZGWQz/Imagen-de-Whats-App-2025-07-07-a-las-20-57-54-98edc2ad.jpg" alt="Bruselas Caoba">
           <span class="fabric-label">BRUSELAS CAOBA</span>
