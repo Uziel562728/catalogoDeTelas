@@ -48,20 +48,32 @@ if (searchInput) {
  // --- NUEVO: Código para el carrusel personalizado ---
   
   // Productos para el carrusel con su info
-  const productos = [
-    {
-      nombre: "Spandex Glitter",
-      descripcion: "Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela."
-    },
-    {
-      nombre: "Sastrero Guinea",
-      descripcion: "Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura."
-    },
-    {
-      nombre: "Tejido Boho",
-      descripcion: "Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad."
-    }
-  ];
+const productos = [
+  {
+    nombre: "Broderie",
+    descripcion: "Tela bordada con detalles delicados y elegantes, ideal para blusas, vestidos frescos y prendas románticas. Su diseño calado permite frescura y estilo en temporadas cálidas."
+  },
+  {
+  nombre: "Retro Print",
+  descripcion: "Estampado con estilo retro que combina colores vibrantes y patrones nostálgicos. Ideal para prendas originales y con personalidad, esta tela aporta un look distintivo y moderno a cualquier diseño."
+},
+  {
+  nombre: "Microfibra Stella",
+  descripcion: "Tela microfibra de alta calidad con tacto suave y gran resistencia. Ideal para prendas deportivas y de uso diario por su transpirabilidad y fácil mantenimiento. Brinda comodidad y durabilidad sin perder estilo."
+},
+  {
+    nombre: "Spandex Glitter",
+    descripcion: "Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela."
+  },
+  {
+    nombre: "Sastrero Guinea",
+    descripcion: "Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura."
+  },
+  {
+    nombre: "Tejido Boho",
+    descripcion: "Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad."
+  }
+];
 
   // Variables para el carrusel
   let currentSlideIndex = 0;
@@ -201,4 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       openModal(slider);
     });
   });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  showSlide(0);
 });
