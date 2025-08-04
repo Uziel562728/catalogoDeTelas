@@ -14,13 +14,21 @@ body {
   color: black;
 }
 
-/* Contenedor principal que crece */
+/* Contenedor principal que crece
 .container {
   flex: 1 0 auto;
   max-width: 480px;
   margin: 0 auto;
   padding: 20px;
+} */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
 
 /* Header */
 header {
