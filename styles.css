@@ -488,3 +488,34 @@ footer {
   background-color: #fffec8; /* un amarillo un poco más claro al enfocar */
 }
 
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  z-index: 10000;
+}
+
+.whatsapp-float-btn:hover,
+.whatsapp-float-btn:focus {
+  background-color: #128C4A;
+  outline: none;
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
