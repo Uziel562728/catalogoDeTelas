@@ -53,6 +53,10 @@ const productos = [
     nombre: "Broderie",
     descripcion: "Tela bordada con detalles delicados y elegantes, ideal para blusas, vestidos frescos y prendas románticas. Su diseño calado permite frescura y estilo en temporadas cálidas."
   },
+  { 
+  nombre: "Lino Grueso",
+  descripcion: "Tela de lino grueso con textura rústica y resistencia superior, ideal para prendas casuales y exteriores que requieren durabilidad y estilo natural. Perfecta para looks frescos y confortables en climas cálidos."
+},
   {
   nombre: "Retro Print",
   descripcion: "Estampado con estilo retro que combina colores vibrantes y patrones nostálgicos. Ideal para prendas originales y con personalidad, esta tela aporta un look distintivo y moderno a cualquier diseño."
