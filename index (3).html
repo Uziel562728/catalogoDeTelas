@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>José Romano - Catálogo de Telas (Móvil)</title>
+  <style>
+/* ===== Estilos MÓVIL-FIRST: tarjetas más juntas y 1 columna ===== */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+body { display: flex; flex-direction: column; min-height: 100vh; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #fff9c4; color: #111; }
+.container { width: 100%; max-width: 480px; margin: 0 auto; padding: 12px; }
+header { text-align: center; background: #fff; border-radius: 16px; padding: 12px; margin-bottom: 12px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+h1 { font-size: 1.5rem; color: #2c3e50; margin: 0 0 6px 0; }
+.subtitle { font-size: .95rem; color: #6b7280; margin: 4px 0 8px; }
+.whatsapp-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(45deg, #25d366, #128c7e); color: #fff; padding: 9px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: .9rem; box-shadow: 0 3px 12px rgba(37, 211, 102, .35); }
+.whatsapp-icon { width: 18px; height: 18px; }
+.section-title { margin: 10px 4px; color: #5D4037; font-size: 1rem; font-weight: 700; }
+.carousel { position: relative; width: 100%; border-radius: 14px; overflow: hidden; box-shadow: 0 5px 14px rgba(0,0,0,.18); background: #111; }
+.carousel img { width: 100%; display: none; }
+.carousel img.active { display: block; }
+.arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.45); border: none; color: #fff; font-size: 1.6rem; border-radius: 999px; width: 36px; height: 36px; line-height: 36px; text-align: center; cursor: pointer; }
+.arrow.left { left: 6px; } .arrow.right { right: 6px; }
+.carousel-indicators { display: flex; justify-content: center; gap: 6px; padding: 8px 0; background: #111; }
+.indicator { width: 8px; height: 8px; border-radius: 50%; background: #777; }
+.indicator.active { background: #4caf50; }
+.product-info { background: #fff; color: #3e2723; padding: 10px 12px; text-align: center; }
+.product-info h3 { margin: 4px 0 6px; font-size: 1.1rem; color: #5D4037; }
+.product-info p  { margin: 0 6px 8px; font-size: .95rem; line-height: 1.35; }
+.product-info .contact-btn { display: inline-block; margin-top: 2px; padding: 8px 14px; border: none; border-radius: 18px; background: linear-gradient(45deg, #667eea, #764ba2); color: #fff; font-weight: 700; font-size: .9rem; }
+.search-container { text-align: center; margin: 10px 0 12px; }
+#fabricSearch { width: 100%; padding: 10px 14px; border: 2px solid #d1d5db; border-radius: 999px; font-size: 1rem; background: #fff; }
+.catalog-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.fabric-card { background: #fff; border-radius: 14px; padding: 8px; box-shadow: 0 6px 16px rgba(0,0,0,.08); transition: transform .2s ease; max-width: 100%; margin: 0; }
+.fabric-card:active { transform: scale(.995); }
+.fabric-slider { position: relative; width: 100%; padding-top: 125%; border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+.slider-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; border-radius: 12px; }
+.slider-img.active { opacity: 1; }
+.fabric-label { position: absolute; left: 8px; bottom: 8px; color: #fff; font-weight: 800; text-shadow: 0 1px 6px rgba(0,0,0,.7); font-size: .9rem; }
+.fabric-name { font-weight: 800; color: #2c3e50; font-size: 1rem; margin-bottom: 4px; }
+.fabric-description { color: #6b7280; font-size: .9rem; margin-bottom: 8px; line-height: 1.35; }
+.fabric-price { color: #e11d48; font-weight: 800; margin-bottom: 8px; }
+.contact-btn { display: block; width: 100%; background: linear-gradient(45deg, #667eea, #764ba2); color: #fff; padding: 9px 14px; border: none; border-radius: 12px; font-weight: 800; font-size: .95rem; text-decoration: none; text-align: center; }
+.whatsapp-float-btn{ position: fixed; right: 14px; bottom: 14px; z-index: 50; width: 56px; height: 56px; border-radius: 50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+footer { margin-top: 14px; padding: 16px 12px; text-align: center; background: #0b0b0b; color: #fff; font-size: .85rem; width: 100%; }
+/* Modal: forzamos oculto para que no aparezca nunca por defecto */
+.modal { display: none !important; position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; }
+.modal .modal-content { max-width: 90%; max-height: 70vh; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+.modal .modal-caption { margin: 10px 0 16px; color: #fff; }
+.modal .close { position: absolute; top: 10px; right: 16px; color: #fff; font-size: 2rem; cursor: pointer; }
+.modal .prev, .modal .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.4); border: none; color: #fff; font-size: 2rem; width: 42px; height: 42px; border-radius: 8px; cursor: pointer; }
+.modal .prev { left: 10px; } .modal .next { right: 10px; }
+/* Responsive extra */
+@media (min-width: 600px) { .container { max-width: 640px; } .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .container { max-width: 720px; } .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
+  
+
+/* Botón flotante WhatsApp con fondo verde circular */
+.wa-float {
+  position: fixed;
+  right: 4px;
+  bottom: 8px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366; /* verde WhatsApp */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: transform .2s ease;
+}
+.wa-float:hover { transform: scale(1.05); }
+.wa-float svg {
+  width: 28px;
+  height: 28px;
+  fill: white; /* logo blanco sobre fondo verde */
+}
+
+.wa-float:active svg { transform: scale(0.96); }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>• José Romano •</h1>
+      <p class="subtitle">Catálogo temporada verano 2026</p>
+      <p>Lino • Modal • Noche • Lentejuela • Camiseros • Broderie • Encajes • Cey • Novedades</p>
+      <a href="https://wa.me/541565903806" class="whatsapp-btn" target="_blank">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.297.298-.495.099-.198.05-.371-.025-.52-.075-.149-.67-1.612-.916-2.204-.242-.579-.487-.5-.67-.51-.173-.007-.371-.009-.57-.009s-.52.074-.792.371c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        </svg>
+        Contactar por WhatsApp
+      </a>
+    </header>
+
+    <h2 class="section-title">Tendencias / Stock Verano 🔥🔥🔥</h2>
+    <div class="carousel">
+      <img src="https://i.ibb.co/PZDdtpMC/Imagen-de-Whats-App-2025-08-04-a-las-07-10-28-7700b586.jpg" alt="Broderie" class="active" />
+      <img src="https://i.ibb.co/C5gBdLZ6/Imagen-de-Whats-App-2025-08-04-a-las-19-20-03-0dcda66c.jpg" alt="Lino Grueso" />
+      <img src="https://i.ibb.co/9mp0cLcr/Imagen-de-Whats-App-2025-08-04-a-las-19-05-30-09065f32.jpg" alt="Retro Print" />
+      <img src="https://i.ibb.co/RkFyLTXf/Imagen-de-Whats-App-2025-08-04-a-las-18-30-30-98c548e0.jpg" alt="Microfibra Stella" />
+      <img src="https://i.ibb.co/NdZmTd3c/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-49a5c55d.jpg" alt="Spandex Glitter" />
+      <img src="https://i.ibb.co/JWNnRNc1/Imagen-de-Whats-App-2025-07-07-a-las-20-57-20-5cfae2e5.jpg" alt="Sastrero Guinea" />
+      <img src="https://i.ibb.co/S4NXdTrk/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-57b22853.jpg" alt="Tejido Boho" />
+      <button class="arrow left" onclick="prevSlide()">❮</button>
+      <button class="arrow right" onclick="nextSlide()">❯</button>
+      <div class="carousel-indicators">
+        <div class="indicator active" onclick="currentSlide(1)"></div>
+        <div class="indicator" onclick="currentSlide(2)"></div>
+        <div class="indicator" onclick="currentSlide(3)"></div>
+        <div class="indicator" onclick="currentSlide(4)"></div>
+        <div class="indicator" onclick="currentSlide(5)"></div>
+        <div class="indicator" onclick="currentSlide(6)"></div>
+        <div class="indicator" onclick="currentSlide(7)"></div>
+      </div>
+      <div class="product-info">
+        <h3 id="product-name">Broderie</h3>
+        <p id="product-description">Tela bordada con detalles delicados y elegantes, ideal para blusas, vestidos frescos y prendas románticas. Su diseño calado permite frescura y estilo en temporadas cálidas.</p>
+        <button class="contact-btn" onclick="enviarConsultaConNombre(document.getElementById('product-name').textContent)">Consultar</button>
+      </div>
+    </div>
+
+    <div class="search-container">
+      <input type="text" id="fabricSearch" placeholder="Buscar tela..." />
+    </div>
+
+    <!-- TODAS las telas -->
+    <div class="catalog-grid">
+      <!-- Lino Grueso -->
+      <div id="lino-grueso" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/C5gBdLZ6/Imagen-de-Whats-App-2025-08-04-a-las-19-20-03-0dcda66c.jpg" alt="Lino Grueso 1">
+          <img class="slider-img" src="https://i.ibb.co/CcBpXF0/Imagen-de-Whats-App-2025-08-04-a-las-19-21-07-54a28929.jpg" alt="Lino Grueso 2">
+          <span class="fabric-label">LINO GRUESO</span>
+        </div>
+        <div class="fabric-name">Lino Grueso</div>
+        <div class="fabric-description">Tela de lino grueso con textura rústica y resistencia superior, ideal para prendas casuales y exteriores que requieren durabilidad y estilo natural. Perfecta para looks frescos y confortables en climas cálidos.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Lino Grueso">Consultar</a>
+      </div>
+
+      <!-- Microfibra Stella -->
+      <div id="microfibra-stella" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/RkFyLTXf/Imagen-de-Whats-App-2025-08-04-a-las-18-30-30-98c548e0.jpg" alt="Microfibra Stella 1">
+          <span class="fabric-label">MICROFIBRA STELLA</span>
+        </div>
+        <div class="fabric-name">Microfibra Stella</div>
+        <div class="fabric-description">Tela microfibra de alta calidad con tacto suave y gran resistencia. Ideal para prendas deportivas y de uso diario por su transpirabilidad y fácil mantenimiento. Brinda comodidad y durabilidad sin perder estilo.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Microfibra Stella">Consultar</a>
+      </div>
+
+      <!-- Retro Print -->
+      <div id="retro-print" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/MyGwvxg3/Imagen-de-Whats-App-2025-08-04-a-las-07-11-26-9c305007.jpg" alt="Retro Print 1">
+          <img class="slider-img" src="https://i.ibb.co/9mp0cLcr/Imagen-de-Whats-App-2025-08-04-a-las-19-05-30-09065f32.jpg" alt="Retro Print 2">
+          <span class="fabric-label">RETRO PRINT</span>
+        </div>
+        <div class="fabric-name">Retro Print</div>
+        <div class="fabric-description">Estampado con estilo retro que combina colores vibrantes y patrones nostálgicos. Ideal para prendas originales y con personalidad, esta tela aporta un look distintivo y moderno a cualquier diseño.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Retro Print">Consultar</a>
+      </div>
+
+      <!-- Broderie -->
+      <div id="broderie" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/PZDdtpMC/Imagen-de-Whats-App-2025-08-04-a-las-07-10-28-7700b586.jpg" alt="Broderie 1">
+          <img class="slider-img" src="https://i.ibb.co/mCfd64Kr/Imagen-de-Whats-App-2025-08-04-a-las-07-09-55-98941258.jpg" alt="Broderie 2">
+          <img class="slider-img" src="https://i.ibb.co/FLyknmLK/Imagen-de-Whats-App-2025-08-04-a-las-07-09-54-93ba3472.jpg" alt="Broderie 3">
+          <span class="fabric-label">BRODERIE</span>
+        </div>
+        <div class="fabric-name">Broderie</div>
+        <div class="fabric-description">Tela bordada con detalles delicados y elegantes, ideal para blusas, vestidos frescos y prendas románticas. Su diseño calado permite frescura y estilo en temporadas cálidas.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Broderie">Consultar</a>
+      </div>
+
+      <!-- SPANDEX GLITTER -->
+      <div id="spandex-glitter" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/NdZmTd3c/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-49a5c55d.jpg" alt="SPANDEX GLITTER">
+          <img class="slider-img" src="https://i.ibb.co/BYC81mS/Imagen-de-Whats-App-2025-08-01-a-las-17-13-45-cdd2fd7f.jpg" alt="SPANDEX GLITTER">
+          <span class="fabric-label">Spandex Glitter</span>
+        </div>
+        <div class="fabric-name">SPANDEX GLITTER</div>
+        <div class="fabric-description">Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Spandex Glitter">Consultar</a>
+      </div>
+
+      <!-- SASTRERO GUINEA  -->
+      <div id="sastrero-guinea" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/JWNnRNc1/Imagen-de-Whats-App-2025-07-07-a-las-20-57-20-5cfae2e5.jpg" alt="SASTRERO GUINEA">
+          <span class="fabric-label">Sastrero Guinea</span>
+        </div>
+        <div class="fabric-name">SASTRERO GUINEA</div>
+        <div class="fabric-description">Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Sastrero Guinea">Consultar</a>
+      </div>
+
+      <!-- Tejido Boho  -->
+      <div id="tejido-boho" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/S4NXdTrk/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-57b22853.jpg" alt="Tejido Boho">
+          <span class="fabric-label">Tejido Boho</span>
+        </div>
+        <div class="fabric-name">TEJIDO BOHO</div>
+        <div class="fabric-description">Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Tejido Boho">Consultar</a>
+      </div>
+
+      <!-- Camisero Madrid -->
+      <div id="camisero-madrid" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/tTD0Y3md/Imagen-de-Whats-App-2025-07-07-a-las-20-57-21-fef42b50.jpg" alt="Camisero Madrid">
+          <span class="fabric-label">Camisero Madrid</span>
+        </div>
+        <div class="fabric-name">CAMISERO MADRID</div>
+        <div class="fabric-description">Tela ligera y suave, con un acabado pulido y caída elegante, ideal para camisas de alta calidad , garantiza comodidad y un aspecto impecable, perfecto para prendas formales y casuales.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Camisero Madrid">Consultar</a>
+      </div>
+
+      <!-- Cey Stripe -->
+      <div id="cey-stripe" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/rRVhv8BZ/Imagen-de-Whats-App-2025-07-07-a-las-20-58-52-7bbbf4bf.jpg" alt="Cey Stripe 1">
+          <img class="slider-img" src="https://i.ibb.co/YBZKGK5j/Imagen-de-Whats-App-2025-06-25-a-las-15-36-14-3d7e2246.jpg" alt="Cey Stripe 2">
+          <span class="fabric-label">CEY STRIPE</span>
+        </div>
+        <div class="fabric-name">Cey Stripe</div>
+        <div class="fabric-description">Tela liviana con rayas sutiles, ideal para camisas elegantes y ropa veraniega con estilo moderno.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Cey Stripe">Consultar</a>
+      </div>
+
+      <!-- Morley Vintage -->
+      <div id="morley-vintage" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/4nwgXLVD/Imagen-de-Whats-App-2025-07-14-a-las-15-03-36-cff3b180.jpg" alt="Morley Vintage 1">
+          <img class="slider-img" src="https://i.ibb.co/DPvfV8nw/Imagen-de-Whats-App-2025-07-14-a-las-14-14-10-aba94905.jpg" alt="Morley Vintage 2">
+          <span class="fabric-label">MORLEY VINTAGE</span>
+        </div>
+        <div class="fabric-name">Morley Vintage</div>
+        <div class="fabric-description">Tela con textura acanalada y estilo retro. Ideal para prendas relajadas, tops y remeras. Suave, cómoda y con excelente caída.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Morley Vintage">Consultar</a>
+      </div>
+
+      <!-- Foil-Plizado -->
+      <div id="foil plizado" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/gbJ2xMc4/Imagen-de-Whats-App-2025-07-14-a-las-09-43-46-41f6c977.jpg" alt="Foil Plizado 1">
+          <img class="slider-img" src="https://i.ibb.co/L2dRSLT/Imagen-de-Whats-App-2025-07-14-a-las-14-31-25-f6d9f8c8.jpg" alt="Foil Plizado 2">
+          <img class="slider-img" src="https://i.ibb.co/yFL8Gshf/Imagen-de-Whats-App-2025-07-14-a-las-14-33-54-7789d4a7.jpg" alt="Foil Plizado 3">
+          <span class="fabric-label">FOIL PLIZADO</span>
+        </div>
+        <div class="fabric-name">Foil Plizado</div>
+        <div class="fabric-description">Tela metálica con efecto plisado y brillo intenso. Ideal para prendas de noche, fiestas y detalles llamativos. Ligera, elegante y con mucho movimiento.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Foil Plizado">Consultar</a>
+      </div>
+
+      <!-- Plated-Foil-Clásico -->
+      <div id="plated foil clasico" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/gbw9B01J/Imagen-de-Whats-App-2025-07-14-a-las-14-14-42-c9468e89.jpg" alt="Plated Foil Clásico 1">
+          <img class="slider-img" src="https://i.ibb.co/jvs0b5Jp/Imagen-de-Whats-App-2025-07-14-a-las-14-41-39-9eeebb9e.jpg" alt="Plated Foil Clásico 2">
+          <span class="fabric-label">PLATED FOIL CLÁSICO</span>
+        </div>
+        <div class="fabric-name">Plated Foil Clásico</div>
+        <div class="fabric-description">Tela con acabado metálico tipo foil, textura suave y brillo uniforme. Perfecta para vestidos de noche, tops y outfits con impacto visual. Liviana y con caída fluida.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Plated Foil Clásico">Consultar</a>
+      </div>
+
+      <!-- Lentejuela Tull -->
+      <div id="lentejuela-tull" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/5XcQbp0S/Imagen-de-Whats-App-2025-07-07-a-las-20-59-11-6dad610a.jpg" alt="Lentejuela Tull">
+          <span class="fabric-label">LENTEJUELA TULL</span>
+        </div>
+        <div class="fabric-name">Lentejuela Tull</div>
+        <div class="fabric-description">Tela especial para eventos y fiestas, elegante y brillante.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Lentejuela Tull">Consultar</a>
+      </div>
+
+      <!-- Lolise Puffing Dsn #2 -->
+      <div id="lolise-puffing-dsn-#2" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/XZ7VnV4x/Imagen-de-Whats-App-2025-06-24-a-las-17-24-16-7584622e.jpg" alt="Lolise Puffing Dsn 1">
+          <img class="slider-img" src="https://i.ibb.co/fdQ51qLs/Imagen-de-Whats-App-2025-06-24-a-las-17-19-11-45dab3ca.jpg" alt="Lolise Puffing Dsn 2">
+          <img class="slider-img" src="https://i.ibb.co/LDjQ3fYr/Imagen-de-Whats-App-2025-07-07-a-las-21-35-42-a13abf05.jpg" alt="Lolise Puffing Dsn 3">
+          <span class="fabric-label">LOLISE PUFFING DSN #2</span>
+        </div>
+        <div class="fabric-name">Lolise Puffing Dsn #2</div>
+        <div class="fabric-description">Tela ligera y aireada. Perfecta para vestidos y blusas con volumen y movimiento.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Lolise Puffing Dsn #2">Consultar</a>
+      </div>
+
+      <!-- Noche Scuba Glitter -->
+      <div id="noche-scuba-glitter" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/0pN6Fs3d/Imagen-de-Whats-App-2025-06-23-a-las-13-38-05-a414cec7.jpg" alt="Noche Scuba Glitter 1">
+          <img class="slider-img" src="https://i.ibb.co/DDst815J/Imagen-de-Whats-App-2025-06-23-a-las-13-46-17-b6cd6e21.jpg" alt="Noche Scuba Glitter 2">
+          <img class="slider-img" src="https://i.ibb.co/DgvTFF5M/Imagen-de-Whats-App-2025-07-07-a-las-20-59-52-5ef22a21.jpg" alt="Noche Scuba Glitter 4">
+          <img class="slider-img" src="https://i.ibb.co/hRDQpGg4/Imagen-de-Whats-App-2025-06-23-a-las-13-57-06-c135d874.jpg" alt="Noche Scuba Glitter 3">
+          <span class="fabric-label">NOCHE SCUBA GLITTER</span>
+        </div>
+        <div class="fabric-name">Noche Scuba Glitter</div>
+        <div class="fabric-description">Noche Scuba Glitter rinde 2.70 mts. Elastizada y brillante.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Noche Scuba Glitter">Consultar</a>
+      </div>
+
+      <!-- Modal Viscosa -->
+      <div id="modal-viscosa" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/DPV6H2yR/Imagen-de-Whats-App-2025-07-07-a-las-20-58-55-833db329.jpg" alt="Modal Viscosa">
+          <span class="fabric-label">MODAL VISCOSA</span>
+        </div>
+        <div class="fabric-name">Modal Viscosa</div>
+        <div class="fabric-description">Colorido 2026 completo, tela suave y fluida, ideal para prendas cómodas y con caída elegante.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Modal Viscosa">Consultar</a>
+      </div>
+
+      <!-- Creppe Sastrero Rayado -->
+      <div id="creppe-sastrero-rayado" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/d4j3ZNLX/Imagen-de-Whats-App-2025-07-07-a-las-20-58-33-77a48086.jpg" alt="Creppe Sastrero Rayado">
+          <span class="fabric-label">CREPPE SASTRERO RAYADO</span>
+        </div>
+        <div class="fabric-name">Creppe Sastrero Rayado</div>
+        <div class="fabric-description">Tela con textura suave y rayado fino. Ideal para sastrería elegante y versátil para looks urbanos o formales.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Creppe Sastrero Rayado">Consultar</a>
+      </div>
+
+      <!-- Sastrero Colores 2026 -->
+      <div id="sastrero-colores-2026" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/FbqNYrHZ/Imagen-de-Whats-App-2025-07-07-a-las-20-58-14-3315a956.jpg" alt="Sastrero Colores 2026">
+          <span class="fabric-label">SASTRERO COLORES 2026</span>
+        </div>
+        <div class="fabric-name">Sastrero Colores 2026</div>
+        <div class="fabric-description">Nueva colección con colores modernos y elegantes para la temporada 2026. Ideal para prendas formales y livianas.</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Sastrero Colores 2026">Consultar</a>
+      </div>
+
+      <!-- Bruselas Caoba -->
+      <div id="bruselas-caoba" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/QjbZGWQz/Imagen-de-Whats-App-2025-07-07-a-las-20-57-54-98edc2ad.jpg" alt="Bruselas Caoba">
+          <span class="fabric-label">BRUSELAS CAOBA</span>
+        </div>
+        <div class="fabric-name">Bruselas Caoba</div>
+        <div class="fabric-description">Novedad 2026! Elastizado, rinde 3.60 mts. ¡Reserva ya!</div>
+        <div class="fabric-price">Consulta precios</div>
+        <a href="#" class="contact-btn" data-name="Bruselas Caoba">Consultar</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 José Romano - Catálogo de Telas</p>
+    <p>Todos los derechos reservados | Calidad y elegancia en cada metro</p>
+  </footer>
+
+  <!-- Modal SIEMPRE oculto por defecto -->
+  <div id="imageModal" class="modal" style="display:none" aria-hidden="true">
+    <span class="close" aria-label="Cerrar">&times;</span>
+    <img class="modal-content" id="modalImage" src="" alt="Imagen Tela" />
+    <div class="modal-caption" id="modalCaption"></div>
+    <button class="prev" aria-label="Anterior">&#10094;</button>
+    <button class="next" aria-label="Siguiente">&#10095;</button>
+  </div>
+
+  <script>
+// Animación + buscador
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.fabric-card');
+  cards.forEach((card, idx) => {
+    card.style.opacity = '0'; card.style.transform = 'translateY(18px)';
+    setTimeout(()=>{
+      card.style.transition = 'all .45s ease';
+      card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+    }, idx * 120);
+  });
+  const searchInput = document.getElementById('fabricSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      document.querySelectorAll('.fabric-card').forEach(card => {
+        const name = card.querySelector('.fabric-name').textContent.toLowerCase();
+        const description = card.querySelector('.fabric-description').textContent.toLowerCase();
+        card.style.display = (name.includes(filter) || description.includes(filter)) ? '' : 'none';
+      });
+    });
+  }
+});
+
+// Slider automático por tarjeta
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.fabric-slider').forEach(slider => {
+    const images = slider.querySelectorAll('.slider-img');
+    if (images.length <= 1) return;
+    let current = 0;
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 3000);
+  });
+});
+
+// Carrusel cabecera
+const productos = [
+  { nombre: "Broderie", descripcion: "Tela bordada con detalles delicados y elegantes, ideal para blusas, vestidos frescos y prendas románticas. Su diseño calado permite frescura y estilo en temporadas cálidas."},
+  { nombre: "Lino Grueso", descripcion: "Tela de lino grueso con textura rústica y resistencia superior, ideal para prendas casuales y exteriores que requieren durabilidad y estilo natural. Perfecta para looks frescos y confortables en climas cálidos."},
+  { nombre: "Retro Print", descripcion: "Estampado con estilo retro que combina colores vibrantes y patrones nostálgicos. Ideal para prendas originales y con personalidad, esta tela aporta un look distintivo y moderno a cualquier diseño."},
+  { nombre: "Microfibra Stella", descripcion: "Tela microfibra de alta calidad con tacto suave y gran resistencia. Ideal para prendas deportivas y de uso diario por su transpirabilidad y fácil mantenimiento. Brinda comodidad y durabilidad sin perder estilo."},
+  { nombre: "Spandex Glitter", descripcion: "Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela."},
+  { nombre: "Sastrero Guinea", descripcion: "Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura."},
+  { nombre: "Tejido Boho", descripcion: "Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad."}
+];
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.carousel img');
+const indicators = document.querySelectorAll('.indicator');
+function showSlide(index) {
+  if (!slides.length) return;
+  slides.forEach(s => s.classList.remove('active'));
+  indicators.forEach(i => i.classList.remove('active'));
+  if (index >= slides.length) currentSlideIndex = 0;
+  else if (index < 0) currentSlideIndex = slides.length - 1;
+  else currentSlideIndex = index;
+  slides[currentSlideIndex].classList.add('active');
+  if (indicators[currentSlideIndex]) indicators[currentSlideIndex].classList.add('active');
+  const nameEl = document.getElementById('product-name');
+  const descEl = document.getElementById('product-description');
+  if (nameEl && descEl) {
+    nameEl.textContent = productos[currentSlideIndex].nombre;
+    descEl.textContent = productos[currentSlideIndex].descripcion;
+  }
+}
+function nextSlide(){ showSlide(currentSlideIndex+1); }
+function prevSlide(){ showSlide(currentSlideIndex-1); }
+function currentSlide(n){ showSlide(n-1); }
+window.nextSlide = nextSlide; window.prevSlide = prevSlide; window.currentSlide = currentSlide;
+setInterval(nextSlide, 4000);
+
+// WhatsApp con nombre
+function enviarConsultaConNombre(nombreTela) {
+  const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
+  const numero = "541565903806";
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+}
+
+// Modal de imágenes
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const modalCaption = document.getElementById('modalCaption');
+const closeBtn = modal.querySelector('.close');
+const prevBtn = modal.querySelector('.prev');
+const nextBtn = modal.querySelector('.next');
+let currentImages = [];
+let currentIndex = 0;
+function openModal(sliderDiv) {
+  currentImages = Array.from(sliderDiv.querySelectorAll('.slider-img')).map(img => img.src);
+  currentIndex = 0;
+  showModalImage();
+  modal.style.display = 'flex';
+}
+function showModalImage() {
+  modalImg.src = currentImages[currentIndex];
+  modalCaption.textContent = `Imagen ${currentIndex + 1} de ${currentImages.length}`;
+}
+closeBtn.onclick = () => { modal.style.display = 'none'; };
+prevBtn.onclick = () => { currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; showModalImage(); };
+nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % currentImages.length; showModalImage(); };
+window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+// Listeners de tarjetas
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.contact-btn[data-name]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const nombreTela = btn.dataset.name || 'Tela';
+      enviarConsultaConNombre(nombreTela);
+    });
+  });
+  document.querySelectorAll('.fabric-slider').forEach(slider => {
+    slider.style.cursor = 'pointer';
+    slider.addEventListener('click', () => openModal(slider));
+  });
+  showSlide(0);
+});
+  
+// --- Habilitar modal también en imágenes del catálogo ---
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.fabric-slider').forEach(slider => {
+    slider.style.cursor = 'pointer';
+    slider.addEventListener('click', () => {
+      openModal(slider);
+    });
+  });
+});
+
+</script>
+
+  <!-- Botón flotante WhatsApp SIN fondo -->
+  <a class="wa-float" href="https://wa.me/541565903806?text=%C2%A1Hola!%20Vengo%20de%20la%20p%C3%A1gina%20y%20quiero%20consultar%20por%20una%20tela." target="_blank" aria-label="Contactar por WhatsApp">
+    <!-- Logo WhatsApp en SVG, sin fondo -->
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path d="M19.11 17.38c-.28-.14-1.64-.81-1.9-.9-.26-.09-.44-.14-.62.14-.18.27-.72.9-.88 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.24-1.38-.83-.74-1.38-1.64-1.53-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.49.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.63-1.5-.86-2.05-.23-.54-.46-.47-.63-.48-.16-.01-.35-.01-.54-.01s-.49.07-.75.34c-.26.27-.98.94-.98 2.29s1 2.65 1.14 2.83c.14.18 1.97 2.95 4.78 4.13.67.28 1.19.45 1.6.57.67.21 1.28.18 1.76.11.54-.08 1.65-.66 1.88-1.3.23-.64.23-1.19.16-1.3-.07-.11-.26-.18-.53-.31zM16 3C9.38 3 4 8.38 4 15c0 2.12.58 4.11 1.6 5.82L4 29l8.36-1.55C13.97 28.47 14.97 29 16 29c6.62 0 12-5.38 12-12S22.62 3 16 3zm0 22.07c-.97 0-1.91-.24-2.74-.67l-.2-.1-4.86.9.93-4.74-.13-.22A9.23 9.23 0 1 1 16 25.07z"/>
+    </svg>
+  </a>
+
+</body>
+</html>
